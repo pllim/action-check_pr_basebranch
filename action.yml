@@ -1,0 +1,7 @@
+name: 'Check PR base  branch'
+description: 'Check if PR base branch is correct.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - 'none'
