@@ -15,7 +15,7 @@ with open(event_jsonfile, encoding='utf-8') as fin:
 skip_label = os.environ.get('SKIP_BASEBRANCH_CHECK_LABEL')
 pr_labels = [e['name'] for e in event['pull_request']['labels']]
 if skip_label and skip_label in pr_labels:
-    print('Base branch check is skipped due to the presence of'
+    print('Base branch check is skipped due to the presence of '
           f'{skip_label} label.')
     sys.exit(0)
 
