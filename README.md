@@ -30,3 +30,6 @@ Optionally, you can also define a label to skip this check using
 repository. This feature is useful when your workflow involves occasional
 pull requests to other branches upstream; e.g., manual backport to an older
 release branch.
+
+If this action is triggered by something other than a pull request, it
+will exit successfully with a no-op.

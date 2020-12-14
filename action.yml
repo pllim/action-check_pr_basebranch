@@ -1,4 +1,4 @@
-name: 'Check PR base  branch'
+name: 'Check PR base branch'
 description: 'Check if PR base branch is correct.'
 runs:
   using: 'docker'

@@ -2,6 +2,11 @@ import json
 import os
 import sys
 
+event_name = os.environ['GITHUB_EVENT_NAME']
+if event_name not in ('pull_request_target', 'pull_request'):
+    print(f'No-op for {event_name}')
+    sys.exit(0)
+
 event_jsonfile = os.environ['GITHUB_EVENT_PATH']
 
 with open(event_jsonfile, encoding='utf-8') as fin:
