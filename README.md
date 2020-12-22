@@ -17,10 +17,9 @@ jobs:
     steps:
     - name: Check base branch
       uses: pllim/action-check_pr_basebranch@main
-      env:
+      with:
         BASEBRANCH_NAME: master
         SKIP_BASEBRANCH_CHECK_LABEL: skip-basebranch-check
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 The allowed base branch is defined by `BASEBRANCH_NAME` (default is `main`).

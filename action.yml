@@ -1,7 +1,15 @@
 name: 'Check PR base branch'
 description: 'Check if PR base branch is correct.'
+author: 'pllim'
+inputs:
+  BASEBRANCH_NAME:
+    description: 'Name of the correct base branch'
+    default: 'main'
+    required: false
+  SKIP_BASEBRANCH_CHECK_LABEL:
+    description: 'Label to skip this check'
+    required: false
+
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-  - 'none'
+  using: 'node12'
+  main: 'dist/index.js'
