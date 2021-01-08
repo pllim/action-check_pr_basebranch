@@ -7,7 +7,7 @@ Create a `.github/workflows/check_pr_basebranch.yml` with this:
 name: Check PR base branch
 
 on:
-  pull_request_target:
+  pull_request:
     types: [opened, synchronize, labeled, unlabeled]
 
 jobs:
