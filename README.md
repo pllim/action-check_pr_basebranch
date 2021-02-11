@@ -1,9 +1,54 @@
+# Alternative: Use github-script
+
+The logic is simple enough that you can do without this custom Action
+and use `github-script` instead, as such, with your own modification
+as necessary:
+
+```yaml
+    steps:
+    - name: Check base branch
+      uses: actions/github-script@v3
+      if: github.event_name == 'pull_request'
+      with:
+        script: |
+          const skip_label = 'skip-basebranch-check';
+          const allowed_basebranch = 'master';
+          const pr = context.payload.pull_request;
+          if (pr.labels.find(lbl => lbl.name === skip_label)) {
+            core.info(`Base branch check is skipped due to the presence of ${skip_label} label`);
+            return;
+          }
+          if (pr.base.ref !== allowed_basebranch) {
+            core.setFailed(`PR opened against ${pr.base.ref}, not ${allowed_basebranch}`);
+          } else {
+            core.info(`PR opened correctly against ${allowed_basebranch}`);
+          }
+```
+
+Or if you want to check it without any labeling:
+
+```yaml
+    steps:
+    - name: Check base branch
+      uses: actions/github-script@v3
+      if: github.event_name == 'pull_request'
+      with:
+        script: |
+          const allowed_basebranch = 'master';
+          const pr = context.payload.pull_request;
+          if (pr.base.ref !== allowed_basebranch) {
+            core.setFailed(`PR opened against ${pr.base.ref}, not ${allowed_basebranch}`);
+          } else {
+            core.info(`PR opened correctly against ${allowed_basebranch}`);
+          }
+```
+
 # GitHub Action to check if PR is opened against allowed base branch
 
 Check if pull request is opened against the allowed base branch upstream.
 Create a `.github/workflows/check_pr_basebranch.yml` with this:
 
-```
+```yaml
 name: Check PR base branch
 
 on:
